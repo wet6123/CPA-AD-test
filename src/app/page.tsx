@@ -1,6 +1,20 @@
+"use client";
 import Image from "next/image";
+import { createClient } from "@supabase/supabase-js";
 
 export default function Home() {
+  const test = async () => {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    // 테스트 쿼리
+    const { data, error } = await supabase.from("your_table").select("*");
+
+    console.log(data, error);
+  };
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -47,6 +61,7 @@ export default function Home() {
           >
             Read our docs
           </a>
+          <button onClick={test}>test</button>
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
