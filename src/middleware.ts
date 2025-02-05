@@ -43,12 +43,18 @@ export async function middleware(req: NextRequest) {
   }
 
   // 프로덕션 환경에서의 도메인별 라우팅
-  if (hostname === "site-a.com" || hostname === "www.site-a.com") {
-    return NextResponse.rewrite(new URL(`/site-a${url.pathname}`, req.url));
-  }
+  // if (hostname === "site-a.com" || hostname === "www.site-a.com") {
+  //   return NextResponse.rewrite(new URL(`/site-a${url.pathname}`, req.url));
+  // }
 
-  if (hostname === "site-b.com" || hostname === "www.site-b.com") {
-    return NextResponse.rewrite(new URL(`/site-b${url.pathname}`, req.url));
+  // if (hostname === "site-b.com" || hostname === "www.site-b.com") {
+  //   return NextResponse.rewrite(new URL(`/site-b${url.pathname}`, req.url));
+  // }
+  if (
+    url.pathname.startsWith("/site-a") ||
+    url.pathname.startsWith("/site-b")
+  ) {
+    return NextResponse.next();
   }
 
   // 기본값은 site-a로 리다이렉트
