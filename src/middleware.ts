@@ -6,7 +6,7 @@ import type { NextRequest } from "next/server";
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
-  const hostname = req.headers.get("host");
+  // const hostname = req.headers.get("host");
 
   // Admin 인증 체크
   if (req.nextUrl.pathname.startsWith("/admin")) {
